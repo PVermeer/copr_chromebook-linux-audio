@@ -2,8 +2,8 @@
 %global commit 99eef5cc3d2f82f451c34764f230f3d5d22239cf
 
 Name: chromebook-linux-audio-cml
-Version: 0.0.0
-Release: 0%{?dist}
+Version: 0.0.1
+Release: 1%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome Comet Lake devices.
 Url: https://github.com/WeirdTreeThing/%{repository}
