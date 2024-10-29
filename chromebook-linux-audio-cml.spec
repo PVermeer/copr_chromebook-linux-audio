@@ -71,6 +71,7 @@ cp -r %{workdir}/sysroot/* %{buildroot}/
 # use filelist
 %files -f %{filelist}
 
-%changelog* Tue Oct 29 2024 mikaelvz <mikael@mvz.fr>
+%changelog
+* Tue Oct 29 2024 mikaelvz <mikael@mvz.fr>
 - add changelog in spec file (mikael@mvz.fr)
 
