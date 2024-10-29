@@ -18,6 +18,7 @@ BuildRequires: python3
 Requires: alsa-sof-firmware
 Requires: alsa-ucm
 
+Source0: %{name}-%{version}.tar.gz
 Patch0: setup_audio.patch
 Patch1: functions_py.patch
 
