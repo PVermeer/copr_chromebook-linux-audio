@@ -2,7 +2,7 @@
 %global commit 99eef5cc3d2f82f451c34764f230f3d5d22239cf
 
 Name: chromebook-linux-audio-cml
-Version: 0.0.1
+Version: 0.0.2
 Release: 1%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome Comet Lake devices.
@@ -71,4 +71,6 @@ cp -r %{workdir}/sysroot/* %{buildroot}/
 # use filelist
 %files -f %{filelist}
 
-%changelog
+%changelog* Tue Oct 29 2024 mikaelvz <mikael@mvz.fr>
+- add changelog in spec file (mikael@mvz.fr)
+
