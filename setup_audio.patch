@@ -1,0 +1,27 @@
+diff --git a/setup-audio b/setup-audio
+index d8b9896..ace7213 100755
+--- a/setup-audio
++++ b/setup-audio
+@@ -288,14 +288,14 @@ if __name__ == "__main__":
+     args = process_args()
+ 
+     # Restart script as root
+-    if os.geteuid() != 0:
+-        # make the two people that use doas happy
+-        if path_exists("/usr/bin/doas"):
+-            doas_args = ['doas', sys.executable] + sys.argv + [os.environ]
+-            os.execlpe('doas', *doas_args)
+-        # other 99 percent of linux users
+-        sudo_args = ['sudo', sys.executable] + sys.argv + [os.environ]
+-        os.execlpe('sudo', *sudo_args)
++    #if os.geteuid() != 0:
++    #    # make the two people that use doas happy
++    #    if path_exists("/usr/bin/doas"):
++    #        doas_args = ['doas', sys.executable] + sys.argv + [os.environ]
++    #        os.execlpe('doas', *doas_args)
++    #    # other 99 percent of linux users
++    #    sudo_args = ['sudo', sys.executable] + sys.argv + [os.environ]
++    #    os.execlpe('sudo', *sudo_args)
+ 
+     # Important message
+     print_warning("WARNING: You may run into audio issues, even after running this script. Please report any issues on github.")
