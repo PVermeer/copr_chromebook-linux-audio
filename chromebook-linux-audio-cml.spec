@@ -70,3 +70,5 @@ cp -r %{workdir}/sysroot/* %{buildroot}/
 
 # use filelist
 %files -f %{filelist}
+
+%changelog
