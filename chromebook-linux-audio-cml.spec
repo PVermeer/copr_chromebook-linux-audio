@@ -1,80 +1,63 @@
 %global repository chromebook-linux-audio
-%global commit 99eef5cc3d2f82f451c34764f230f3d5d22239cf
+%global maincommit e171791e615cb52b808b2b4108ce7ac71298a827
+%global deprepository alsa-ucm-conf-cros
+%global depcommit 1908a457c7f2bf8b63264fe3b1e0522ea632ac5a
+%global versioncommit %(echo -n %{maincommit} | head -c 8)
 
-Name: chromebook-linux-audio-cml
-Version: 0.0.3
-Release: 1%{?dist}
+Name: chromebook-linux-audio
+Version: 0.0.1
+Release: %{versioncommit}%{?dist}
 License: BSD 3-Clause License
-Summary: RPM package to enable audio support on Chrome Comet Lake devices.
+Summary: RPM package to enable audio support on Chrome devices.
 Url: https://github.com/WeirdTreeThing/%{repository}
-
-BuildArch: noarch
-BuildRequires: alsa-sof-firmware
-BuildRequires: alsa-ucm
-BuildRequires: wireplumber
-BuildRequires: git
-BuildRequires: python3
 
 Requires: alsa-sof-firmware
 Requires: alsa-ucm
+Requires: wireplumber
+Requires: git
+Requires: python3
 
-Source0: %{name}-%{version}.tar.gz
-Patch0: setup_audio.patch
-Patch1: functions_py.patch
+Patch1: disable_git_clone.patch
 
-%define workdir %{_builddir}/%{repository}-%{commit}
-%define filelist %{workdir}/filelist.txt
+%define workdir %{_builddir}/%{repository}
+%define bindir %{_bindir}/%{name}
+%define buildbindir $RPM_BUILD_ROOT%{bindir}
 
 %description
-RPM package to install chromebook-linux-audio to enable audio support on Chrome Comet Lake devices.
+RPM package to install chromebook-linux-audio to enable audio support on Chrome devices. All credits go to https://github.com/WeirdTreeThing.
+
+This packages runs the script on install so it will work on immutable devices. If a device is NOT supported it will fail to install.
+
+THe original script comes from https://github.com/mikaelvz/chromebook-linux-audio.
 
 %prep
-# cleanup
-rm -rf %{workdir}
-
-# get chromebook-linux-audio script
-git clone https://github.com/WeirdTreeThing/%{repository} %{workdir}
-cd %{workdir}
-git reset --hard %{commit}
-
-# patch script to save files in a specific folder
-%autopatch
-
-%build
-# preparing directory
-cd %{workdir}
-mkdir -p %{workdir}/sysroot/lib/firmware/intel/sof-tplg
-mkdir -p %{workdir}/sysroot/usr/share/alsa/ucm2/conf.d
-
-# launch script
-./setup-audio -b kled
-
-# clean duplicate files
-rm -f %{filelist}
-find -L %{workdir}/sysroot -type f -print0 |
-while IFS= read -r -d '' file; do
-    file_search=$(echo $file | sed "s#^%{workdir}/sysroot##")
-    if [ -f $file_search ]; then
-        rm -f $file
-    else
-        echo "\"$file_search\"" >> %{filelist}
-    fi
-done
-cat %{filelist}
+# Cleanup
+rm -rf $RPM_BUILD_ROOT
 
 %install
-# install files to build directory
-rm -rf %{buildroot}
-mkdir -p %{buildroot}
-cp -r %{workdir}/sysroot/* %{buildroot}/
+# Get chromebook-linux-audio script
+git clone https://github.com/WeirdTreeThing/%{repository} %{buildbindir}
+cd %{buildbindir}
+git reset --hard %{maincommit}
+%autopatch 1
+rm -rf .git
 
-# use filelist
-%files -f %{filelist}
+# Get chromebook-linux-audio script dependency
+git clone https://github.com/WeirdTreeThing/%{deprepository} %{buildbindir}/%{deprepository}
+cd %{buildbindir}/%{deprepository}
+git reset --hard %{depcommit}
+rm -rf .git
 
-%changelog
-* Tue Oct 29 2024 mikaelvz <mikael@mvz.fr> 0.0.3-1
-- error in %%changelog format (mikael@mvz.fr)
+%files
+%{bindir}
 
-* Tue Oct 29 2024 mikaelvz <mikael@mvz.fr>
-- add changelog in spec file (mikael@mvz.fr)
+%post
+# Patch1 has disabled the dependency git clone in the script and
+# this is now provided in this binary. Copy it to correct location
+# where the script expect it. 
+mkdir /tmp/%{deprepository}
+mv %{buildbindir}/%{deprepository} /tmp
 
+# Run the script
+cd %{bindir}
+./setup-audio

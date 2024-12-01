@@ -1,0 +1,6 @@
+[submodule "chromebook-linux-audio"]
+	path = chromebook-linux-audio
+	url = https://github.com/WeirdTreeThing/chromebook-linux-audio
+[submodule "alsa-ucm-conf-cros"]
+	path = alsa-ucm-conf-cros
+	url = https://github.com/WeirdTreeThing/alsa-ucm-conf-cros

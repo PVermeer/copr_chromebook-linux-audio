@@ -1,0 +1,27 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/alpine
+{
+	"build": {
+		// Path is relative to the devcontainer.json file.
+		"dockerfile": "Dockerfile"
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"installZsh": "false",
+			"username": "vscode",
+			"userUid": "1000",
+			"userGid": "1000",
+			"upgradePackages": "false"
+		}
+	},
+	"postCreateCommand": "sudo dnf update -y && sudo dnf install -y rpmdevtools rpmlint alsa-sof-firmware alsa-ucm",
+	"postStartCommand": "sudo dnf update -y",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"RVSmartPorting.rpm-spec-ext"
+			]
+		}
+	},
+	"remoteUser": "vscode"
+}
