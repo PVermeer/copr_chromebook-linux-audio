@@ -31,7 +31,7 @@ RPM package to install chromebook-linux-audio to enable audio support on Chrome 
 
 This packages runs the script on install so it will work on immutable devices. If a device is NOT supported it will fail to install.
 
-THe original script comes from https://github.com/mikaelvz/chromebook-linux-audio.
+The original script comes from https://github.com/mikaelvz/chromebook-linux-audio.
 
 %prep
 # Get chromebook-linux-audio script
