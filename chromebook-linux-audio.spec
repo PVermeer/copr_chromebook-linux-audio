@@ -11,11 +11,14 @@ License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
 Url: https://github.com/WeirdTreeThing/%{repository}
 
+BuildRequires: alsa-sof-firmware
+BuildRequires: alsa-ucm
+BuildRequires: git
+BuildRequires: python3
+BuildRequires: wireplumber
+
 Requires: alsa-sof-firmware
 Requires: alsa-ucm
-Requires: wireplumber
-Requires: git
-Requires: python3
 
 Patch1: disable_git_clone.patch
 
