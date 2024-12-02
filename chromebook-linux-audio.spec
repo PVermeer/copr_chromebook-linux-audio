@@ -20,8 +20,8 @@ Requires: python3
 Patch1: disable_git_clone.patch
 
 %define workdir %{_builddir}/%{repository}
-%define bindir %{_bindir}/%{name}
-%define buildbindir $RPM_BUILD_ROOT%{bindir}
+%define datadir %{_datadir}/%{name}
+%define builddatadir $RPM_BUILD_ROOT/%{datadir}
 
 %description
 RPM package to install chromebook-linux-audio to enable audio support on Chrome devices. All credits go to https://github.com/WeirdTreeThing.
@@ -31,33 +31,37 @@ This packages runs the script on install so it will work on immutable devices. I
 THe original script comes from https://github.com/mikaelvz/chromebook-linux-audio.
 
 %prep
-# Cleanup
-rm -rf $RPM_BUILD_ROOT
-
-%install
 # Get chromebook-linux-audio script
-git clone https://github.com/WeirdTreeThing/%{repository} %{buildbindir}
-cd %{buildbindir}
+git clone https://github.com/WeirdTreeThing/%{repository} %{workdir}
+cd %{workdir}
 git reset --hard %{maincommit}
 %autopatch 1
 rm -rf .git
 
 # Get chromebook-linux-audio script dependency
-git clone https://github.com/WeirdTreeThing/%{deprepository} %{buildbindir}/%{deprepository}
-cd %{buildbindir}/%{deprepository}
+git clone https://github.com/WeirdTreeThing/%{deprepository} %{workdir}/%{deprepository}
+cd %{workdir}/%{deprepository}
 git reset --hard %{depcommit}
 rm -rf .git
 
+%build
+
+%install
+mkdir -p $RPM_BUILD_ROOT/%{_datadir}
+mv %{workdir} $RPM_BUILD_ROOT/%{_datadir}
+
 %files
-%{bindir}
+%{datadir}
 
 %post
 # Patch1 has disabled the dependency git clone in the script and
 # this is now provided in this binary. Copy it to correct location
 # where the script expect it. 
-mkdir /tmp/%{deprepository}
-mv %{buildbindir}/%{deprepository} /tmp
+cp -r %{datadir}/%{deprepository} /tmp
 
 # Run the script
-cd %{bindir}
+cd %{datadir}
 ./setup-audio
+
+# Cleanup
+rm -rf /tmp/%{deprepository}
