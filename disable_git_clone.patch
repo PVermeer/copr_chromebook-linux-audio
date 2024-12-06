@@ -1,19 +1,17 @@
 diff --git a/setup-audio b/setup-audio
-index 4a88167..13b1fbb 100755
+index 4a88167..411ffb2 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -28,13 +28,13 @@ def process_args():
- 
+@@ -29,12 +29,12 @@ def process_args():
  
  def install_ucm():
--    print_status("Installing UCM configuration")
+     print_status("Installing UCM configuration")
 -    try:
 -        bash("rm -rf /tmp/alsa-ucm-conf-cros")
 -        bash(f"git clone https://github.com/WeirdTreeThing/alsa-ucm-conf-cros -b {args.branch_name[0]} /tmp/alsa-ucm-conf-cros")
 -    except:
 -        print_error("Error: Failed to clone UCM repo")
 -        exit(1)
-+    # print_status("Installing UCM configuration")
 +    # try:
 +    #     bash("rm -rf /tmp/alsa-ucm-conf-cros")
 +    #     bash(f"git clone https://github.com/WeirdTreeThing/alsa-ucm-conf-cros -b {args.branch_name[0]} /tmp/alsa-ucm-conf-cros")
