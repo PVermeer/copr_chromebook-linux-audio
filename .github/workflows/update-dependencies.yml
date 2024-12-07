@@ -1,0 +1,37 @@
+name: Daily COPR
+
+on:
+  schedule:
+    - cron: "30 6 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  update_rpm:
+    runs-on: ubuntu-latest
+    name: Update RPM
+    permissions:
+      contents: write
+    env:
+      UPDATE_STATUS: "current"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update RPM
+        run: |
+          source ./scripts/update-rpm.sh
+          echo "UPDATE_STATUS=$update_status" >> $GITHUB_ENV
+
+      - uses: zyrouge/github-push-action@v1
+        if: ${{ env.UPDATE_STATUS == 'updated' }}
+
+        with:
+          commit-message: "build(github-actions): automated update [skip ci]"
+          allow-empty-commit: false
+
+      - name: Build on COPR
+        if: ${{ env.UPDATE_STATUS == 'updated' }}
+        env:
+          COPR_WEBHOOK: ${{ secrets.COPR_WEBHOOK }}
+        run: |
+          curl -X POST $COPR_WEBHOOK
