@@ -2,11 +2,12 @@
 %global maincommit e171791e615cb52b808b2b4108ce7ac71298a827
 %global deprepository alsa-ucm-conf-cros
 %global depcommit 1908a457c7f2bf8b63264fe3b1e0522ea632ac5a
-%global versioncommit %(echo -n %{maincommit} | head -c 8)
+%global mainversioncommit %(echo -n %{maincommit} | head -c 8)
+%global depversioncommit %(echo -n %{depcommit} | head -c 8)
 
 Name: chromebook-linux-audio
 Version: 0.0.1
-Release: %{versioncommit}%{?dist}
+Release: %{mainversioncommit}.%{depversioncommit}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
 Url: https://github.com/WeirdTreeThing/%{repository}
