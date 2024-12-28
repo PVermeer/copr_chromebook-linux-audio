@@ -3,6 +3,8 @@
 set -e
 set -x
 
+git submodule update --init --recursive
+
 rm -rf ./rpmbuild
 mkdir -p ./rpmbuild/SOURCES
 cp *.patch ./rpmbuild/SOURCES

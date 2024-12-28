@@ -24,7 +24,6 @@ jobs:
 
       - uses: zyrouge/github-push-action@v1
         if: ${{ env.UPDATE_STATUS == 'updated' }}
-
         with:
           commit-message: "build(github-actions): automated update [skip ci]"
           allow-empty-commit: false
