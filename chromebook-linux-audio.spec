@@ -24,6 +24,7 @@ Requires: alsa-ucm
 Patch1: disable_git_clone.patch
 Patch2: disable_max98357a.patch
 Patch3: disable_avs_dsp_firmware.patch
+Patch4: use_sof_for_apl.patch
 
 %define workdir %{_builddir}/%{repository}
 %define datadir %{_datadir}/%{name}
@@ -41,9 +42,12 @@ The original script comes from https://github.com/mikaelvz/chromebook-linux-audi
 git clone https://github.com/WeirdTreeThing/%{repository} %{workdir}
 cd %{workdir}
 git reset --hard %{maincommit}
+
 %autopatch 1
 %autopatch 2
 %autopatch 3
+%autopatch 4
+
 rm -rf .git
 
 # Get chromebook-linux-audio script dependency

@@ -1,0 +1,14 @@
+diff --git a/setup-audio b/setup-audio
+index 026fa35..7c1c745 100755
+--- a/setup-audio
++++ b/setup-audio
+@@ -196,7 +196,8 @@ def apl_audio():
+                 "Your speakers will still work on SOF though.")
+ 
+     while True:
+-        user_input = input("Which driver would you like to use? [sof/avs]: ")
++        # user_input = input("Which driver would you like to use? [sof/avs]: ")
++        user_input = "sof"
+         if user_input.lower() == "sof":
+             print_status("Using sof")
+             # Remove avs modprobe config if it exists
