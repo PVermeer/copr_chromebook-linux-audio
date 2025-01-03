@@ -22,6 +22,7 @@ Requires: alsa-sof-firmware
 Requires: alsa-ucm
 
 Patch1: disable_git_clone.patch
+Patch2: disable_max98357a.patch
 
 %define workdir %{_builddir}/%{repository}
 %define datadir %{_datadir}/%{name}
@@ -40,6 +41,7 @@ git clone https://github.com/WeirdTreeThing/%{repository} %{workdir}
 cd %{workdir}
 git reset --hard %{maincommit}
 %autopatch 1
+%autopatch 2
 rm -rf .git
 
 # Get chromebook-linux-audio script dependency

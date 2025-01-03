@@ -1,0 +1,17 @@
+diff --git a/setup-audio b/setup-audio
+index 026fa35..2bfd99b 100755
+--- a/setup-audio
++++ b/setup-audio
+@@ -118,6 +118,12 @@ def avs_audio():
+     # Only show the warning to devices with max98357a
+     override_avs = False
+     if path_exists("/sys/bus/acpi/devices/MX98357A:00"):
++
++        print_error(
++                "Error: Your device has max98357a and is currently not supported."
++                )
++        exit(1)
++
+         if args.force_avs_install:
+             print_error(
+                 "WARNING: Your device has max98357a and can cause permanent damage to your speakers if you set the volume too loud!")
