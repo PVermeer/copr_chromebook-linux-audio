@@ -7,7 +7,10 @@ update_rpm() {
   local current_dep_commit=$(grep '%global depcommit\s.*$' $spec_file | awk '{ print $3 }')
 
   local new_main_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/chromebook-linux-audio/commits/HEAD")
-  local new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/HEAD")
+  
+  # Temporary using syntax-7 branch since this seems to work better with new kernel
+  # local new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/HEAD")
+  local new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/syntax-7")
 
   if [ "$current_main_commit" = "$new_main_commit" ] && [ "$current_dep_commit" = "$new_dep_commit" ]; then
 
