@@ -1,0 +1,14 @@
+diff --git a/functions.py b/functions.py
+index 85238eb..15f96f9 100644
+--- a/functions.py
++++ b/functions.py
+@@ -119,6 +119,9 @@ def print_header(message: str) -> None:
+ #######################################################################################
+ def install_package(arch_package: str = "", deb_package: str = "", rpm_package: str = "", suse_package: str = "",
+                     void_package: str = "", alpine_package: str = ""):
++    
++    return
++
+     with open("/etc/os-release", "r") as file:
+         distro = file.read()
+     if distro.lower().__contains__("arch"):

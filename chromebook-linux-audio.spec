@@ -25,6 +25,7 @@ Patch1: disable_git_clone.patch
 Patch2: disable_max98357a.patch
 Patch3: disable_avs_dsp_firmware.patch
 Patch4: use_sof_for_apl.patch
+Patch5: disable_install_package.patch
 
 %define workdir %{_builddir}/%{repository}
 %define datadir %{_datadir}/%{name}
@@ -47,6 +48,7 @@ git reset --hard %{maincommit}
 %autopatch 2
 %autopatch 3
 %autopatch 4
+%autopatch 5
 
 rm -rf .git
 
