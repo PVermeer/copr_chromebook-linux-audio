@@ -23,6 +23,7 @@ Requires: alsa-ucm
 
 Patch1: disable_git_clone.patch
 Patch2: disable_max98357a.patch
+Patch3: disable_avs_dsp_firmware.patch
 
 %define workdir %{_builddir}/%{repository}
 %define datadir %{_datadir}/%{name}
@@ -42,6 +43,7 @@ cd %{workdir}
 git reset --hard %{maincommit}
 %autopatch 1
 %autopatch 2
+%autopatch 3
 rm -rf .git
 
 # Get chromebook-linux-audio script dependency
