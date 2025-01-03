@@ -6,7 +6,7 @@
 %global depversioncommit %(echo -n %{depcommit} | head -c 8)
 
 Name: chromebook-linux-audio
-Version: 0.0.1
+Version: 0.0.2
 Release: %{mainversioncommit}.%{depversioncommit}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
