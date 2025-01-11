@@ -6,7 +6,7 @@ index 85238eb..15f96f9 100644
  #######################################################################################
  def install_package(arch_package: str = "", deb_package: str = "", rpm_package: str = "", suse_package: str = "",
                      void_package: str = "", alpine_package: str = ""):
-+    
++
 +    return
 +
      with open("/etc/os-release", "r") as file:
