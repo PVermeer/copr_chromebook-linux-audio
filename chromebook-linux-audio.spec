@@ -6,11 +6,14 @@
 %global depversioncommit %(echo -n %{depcommit} | head -c 8)
 
 Name: chromebook-linux-audio
-Version: 0.0.2
+Version: 0.0.3
 Release: %{mainversioncommit}.%{depversioncommit}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
 Url: https://github.com/WeirdTreeThing/%{repository}
+
+%package debug
+Summary: Enable debug for %{name}
 
 BuildRequires: alsa-sof-firmware
 BuildRequires: alsa-ucm
@@ -38,6 +41,9 @@ RPM package to install chromebook-linux-audio to enable audio support on Chrome 
 This packages runs the script on install so it will work on immutable devices. If a device is NOT supported it will fail to install.
 
 The original script comes from https://github.com/mikaelvz/chromebook-linux-audio.
+
+%description debug
+Enable debug for %{name}
 
 %prep
 # Get chromebook-linux-audio script
@@ -69,6 +75,9 @@ mv %{workdir} $RPM_BUILD_ROOT/%{_datadir}
 %files
 %{datadir}
 
+%files debug
+%{datadir}
+
 %post
 # Patch1 has disabled the dependency git clone in the script and
 # this is now provided in this binary. Copy it to correct location
@@ -81,3 +90,21 @@ cd %{datadir}
 
 # Cleanup
 rm -rf /tmp/%{deprepository}
+
+%post debug
+# Patch1 has disabled the dependency git clone in the script and
+# this is now provided in this binary. Copy it to correct location
+# where the script expect it. 
+cp -r %{datadir}/%{deprepository} /tmp
+
+# Run the script
+cd %{datadir}
+./setup-audio --enable-debug
+
+# Cleanup
+rm -rf /tmp/%{deprepository}
+
+%preun debug
+# Run the script to disable debug
+cd %{datadir}
+./setup-audio --disable-debug
