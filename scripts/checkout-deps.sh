@@ -10,8 +10,13 @@ source ./scripts/update-rpm.sh
 # Checkout commits
 echo -e "\n=== Checking out submodules ===\n"
 
-echo -e "$main_repo: $(cd "./$main_repo" && git reset --hard $current_main_commit)"
-echo -e "$dep_repo: $(cd "./$dep_repo" && git reset --hard $current_dep_commit)"
+git submodule update --init --recursive
+
+echo -e "\nSubmodule <$main_repo>:"
+(cd "./$main_repo" && git reset --hard $current_main_commit)
+
+echo -e "\nSubmodule <$dep_repo>:"
+(cd "./$dep_repo" && git reset --hard $current_dep_commit)
 
 echo -e "\n"
 
