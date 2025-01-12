@@ -19,8 +19,15 @@ jobs:
 
       - name: Update RPM
         run: |
-          source ./scripts/update-rpm.sh
+          # Update spec with HEAD commit of dependencies
+          source ./scripts/update-rpm.sh --print-spec
+          update_rpm
+
+          # Output status to env
           echo "UPDATE_STATUS=$update_status" >> $GITHUB_ENV
+
+          # Checkout submodules
+          bash ./scripts/checkout-deps.sh
 
       - uses: zyrouge/github-push-action@v1
         if: ${{ env.UPDATE_STATUS == 'updated' }}

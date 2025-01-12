@@ -3,7 +3,7 @@
 set -e
 set -x
 
-git submodule update --init --recursive
+bash ./scripts/checkout-deps.sh --apply-patches
 
 rm -rf ./rpmbuild
 mkdir -p ./rpmbuild/SOURCES
