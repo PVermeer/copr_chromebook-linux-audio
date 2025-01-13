@@ -26,7 +26,9 @@ jobs:
           # Output status to env
           echo "UPDATE_STATUS=$update_status" >> $GITHUB_ENV
 
-          # Checkout submodules
+      - name: Checkout submodules
+        if: ${{ env.UPDATE_STATUS == 'updated' }}
+        run: |
           bash ./scripts/checkout-deps.sh
 
       - uses: zyrouge/github-push-action@v1
