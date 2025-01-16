@@ -1,0 +1,19 @@
+name: Daily COPR status
+
+on:
+  schedule:
+    - cron: "30 7 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  update_rpm:
+    runs-on: ubuntu-latest
+    name: Check copr build status
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check status
+        run: |
+          bash ./scripts/status-copr.sh

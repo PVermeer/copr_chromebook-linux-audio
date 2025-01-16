@@ -14,7 +14,7 @@
 			"upgradePackages": "false"
 		}
 	},
-	"postCreateCommand": "sudo dnf update -y && sudo dnf install -y rpmdevtools rpmlint alsa-sof-firmware alsa-ucm",
+	"postCreateCommand": "sudo dnf update -y && sudo dnf install -y rpmdevtools jq rpmlint alsa-sof-firmware alsa-ucm",
 	"postStartCommand": "sudo dnf update -y",
 	"customizations": {
 		"vscode": {
