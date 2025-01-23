@@ -23,9 +23,7 @@ get_new_commits() {
 
   echo "Script commit: $current_main_commit -> $new_main_commit"
 
-  # Temporary using syntax-7 branch since this seems to work better with new kernel
-  # local new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/HEAD")
-  new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/syntax-7")
+  new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/HEAD")
 
   echo "UCM conf commit: $current_dep_commit -> $new_dep_commit"
 
