@@ -32,11 +32,15 @@ jobs:
         run: |
           bash ./scripts/checkout-deps.sh
 
-      - uses: zyrouge/github-push-action@v1
+      - name: Commit changes
         if: ${{ env.UPDATE_STATUS == 'updated' }}
-        with:
-          commit-message: "build(github-actions): automated update [skip ci]"
-          allow-empty-commit: false
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "CI"
+          git commit -a -m "build(github-actions): automated update [skip ci]"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
 
       - name: Build on COPR
         if: ${{ env.UPDATE_STATUS == 'updated' }}
