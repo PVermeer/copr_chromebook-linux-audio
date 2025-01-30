@@ -14,8 +14,8 @@ build_state=$(curl -s -X 'GET' \
 
 echo "Copr build status: $build_state"
 
-if [ "$build_state" = "succeeded" ]; then
-  exit 0
-else
+if [ "$build_state" = "failed" ]; then
   exit 1
+else
+  exit 0
 fi
