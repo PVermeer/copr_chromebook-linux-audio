@@ -1,7 +1,7 @@
 %global repository chromebook-linux-audio
 %global maincommit 4617151f8ade809b3ef92621d75bbc2a08589741
 %global deprepository alsa-ucm-conf-cros
-%global depcommit 9f8b292f3671bd00152c4f7c8c8ff5dc9da103f8
+%global depcommit 6603820359143ed564a316aed4fcf966635d3868
 %global mainversioncommit %(echo -n %{maincommit} | head -c 8)
 %global depversioncommit %(echo -n %{depcommit} | head -c 8)
 
