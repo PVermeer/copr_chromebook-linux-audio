@@ -3,7 +3,7 @@
 set -e
 
 source ./scripts/bash-color.sh
-source ./scripts/update-rpm.sh --no-update
+source ./scripts/spec-file.sh
 
 apply_patches=$([ "$1" == "--apply-patches" ] && echo "true" || echo "false")
 
