@@ -1,3 +1,4 @@
+%global author WeirdTreeThing
 %global repository chromebook-linux-audio
 %global maincommit ae2f8cf30a26806376cc8591af4a66d33a763ef4
 %global deprepository alsa-ucm-conf-cros
@@ -10,7 +11,7 @@ Version: 0.0.3
 Release: %{mainversioncommit}.%{depversioncommit}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
-Url: https://github.com/WeirdTreeThing/%{repository}
+Url: https://github.com/%{author}/%{repository}
 
 %package debug
 Summary: Enable debug for %{name}
@@ -36,7 +37,7 @@ Patch6: fail_platform_stoney.patch
 %define builddatadir $RPM_BUILD_ROOT/%{datadir}
 
 %description
-RPM package to install chromebook-linux-audio to enable audio support on Chrome devices. All credits go to https://github.com/WeirdTreeThing.
+RPM package to install chromebook-linux-audio to enable audio support on Chrome devices. All credits go to https://github.com/%{author}.
 
 This packages runs the script on install so it will work on immutable devices. If a device is NOT supported it will fail to install.
 
@@ -47,7 +48,7 @@ Enable debug for %{name}
 
 %prep
 # Get chromebook-linux-audio script
-git clone https://github.com/WeirdTreeThing/%{repository} %{workdir}
+git clone https://github.com/%{author}/%{repository} %{workdir}
 cd %{workdir}
 git reset --hard %{maincommit}
 
@@ -61,7 +62,7 @@ git reset --hard %{maincommit}
 rm -rf .git
 
 # Get chromebook-linux-audio script dependency
-git clone https://github.com/WeirdTreeThing/%{deprepository} %{workdir}/%{deprepository}
+git clone https://github.com/%{author}/%{deprepository} %{workdir}/%{deprepository}
 cd %{workdir}/%{deprepository}
 git reset --hard %{depcommit}
 rm -rf .git

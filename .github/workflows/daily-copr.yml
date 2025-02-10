@@ -20,6 +20,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Update RPM
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         run: |
           # Update spec with HEAD commit of dependencies
           source ./scripts/update-rpm.sh --print-spec

@@ -32,8 +32,16 @@ echo_color "\n=== Checking for changes ===\n"
 
 echo_color "Fetching dependency git commits"
 
-new_main_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/chromebook-linux-audio/commits/HEAD")
-new_dep_commit=$(curl -s -H "Accept: application/vnd.github.VERSION.sha" "https://api.github.com/repos/WeirdTreeThing/alsa-ucm-conf-cros/commits/HEAD")
+github_uri="https://api.github.com/repos/$author"
+github_api_request="-H 'Accept: application/vnd.github.VERSION.sha'"
+
+if [ -n "$GITHUB_TOKEN" ]; then
+  echo "Github token found"
+  github_api_request+=" -H 'Authorization: Bearer $GITHUB_TOKEN'"
+fi
+
+new_main_commit=$(curl -s "$github_api_request" "$github_uri/$main_repo/commits/HEAD")
+new_dep_commit=$(curl -s "$github_api_request" "$github_uri/$dep_repo/commits/HEAD")
 
 echo "Script commit: $current_main_commit -> $new_main_commit"
 echo "UCM conf commit: $current_dep_commit -> $new_dep_commit"

@@ -4,6 +4,7 @@
 
 spec_file=./chromebook-linux-audio.spec
 
+author=$(grep '%global author\s.*$' $spec_file | awk '{ print $3 }')
 main_repo=$(grep '%global repository\s.*$' $spec_file | awk '{ print $3 }')
 dep_repo=$(grep '%global deprepository\s.*$' $spec_file | awk '{ print $3 }')
 
