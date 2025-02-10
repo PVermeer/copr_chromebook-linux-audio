@@ -14,6 +14,7 @@ jobs:
     timeout-minutes: 5
     env:
       UPDATE_STATUS: "current"
+      COPR_STATUS: "succeeded"
 
     steps:
       - uses: actions/checkout@v4
@@ -22,10 +23,13 @@ jobs:
         run: |
           # Update spec with HEAD commit of dependencies
           source ./scripts/update-rpm.sh --print-spec
-          update_rpm
+
+          # Check copr build
+          source ./scripts/status-copr.sh --no-fail
 
           # Output status to env
           echo "UPDATE_STATUS=$update_status" >> $GITHUB_ENV
+          echo "COPR_STATUS=$build_state" >> $GITHUB_ENV
 
       - name: Checkout submodules
         if: ${{ env.UPDATE_STATUS == 'updated' }}
@@ -40,10 +44,11 @@ jobs:
           git commit -a -m "build(github-actions): automated update [skip ci]"
 
       - name: Push changes
+        if: ${{ env.UPDATE_STATUS == 'updated' }}
         uses: ad-m/github-push-action@master
 
       - name: Build on COPR
-        if: ${{ env.UPDATE_STATUS == 'updated' }}
+        if: ${{ env.UPDATE_STATUS == 'updated' }} || ${{ env.COPR_STATUS == 'failed' }}
         env:
           COPR_WEBHOOK: ${{ secrets.COPR_WEBHOOK }}
         run: |
