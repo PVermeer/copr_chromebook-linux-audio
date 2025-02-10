@@ -50,7 +50,7 @@ jobs:
         uses: ad-m/github-push-action@master
 
       - name: Build on COPR
-        if: ${{ env.UPDATE_STATUS == 'updated' }} || ${{ env.COPR_STATUS == 'failed' }}
+        if: ${{ env.UPDATE_STATUS == 'updated' || env.COPR_STATUS == 'failed' }}
         env:
           COPR_WEBHOOK: ${{ secrets.COPR_WEBHOOK }}
         run: |
