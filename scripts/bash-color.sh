@@ -64,5 +64,13 @@ BASH_XTRACEFD=1 # set -x to stdout
 
 # Color wrapper
 echo_color() {
-  echo -e "${themecolor}$@${removecolor}"
+  local arguments=$@
+
+  # Some shells (github actions!) dont pass the color
+  # to the next line when provided before `\n`
+  if [ "${arguments:0:2}" = "\n" ]; then
+    arguments=${arguments#\\n}
+    echo ""
+  fi
+  echo -e "${themecolor}$arguments${removecolor}"
 }
