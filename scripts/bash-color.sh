@@ -13,7 +13,7 @@ removecolor='\033[0m'
 arrow='➜'
 themecolor=$purple
 
-THEME=$(gsettings get org.gnome.desktop.interface accent-color || echo "'purple'")
+THEME=$(gsettings get org.gnome.desktop.interface accent-color 2>/dev/null || echo "'purple'")
 THEME=${THEME//\'/}
 
 case $THEME in
