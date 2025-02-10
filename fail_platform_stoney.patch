@@ -2,7 +2,7 @@ diff --git a/setup-audio b/setup-audio
 index 026fa35..e7c8d4d 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -283,6 +283,7 @@ def amd_audio(platform):
+@@ -266,6 +266,7 @@ def amd_audio(platform):
      elif platform == "stoney":
          print_warning("WARNING: Your audio will not work unless you install a custom kernel")
          print_warning("You can get a prebuilt kernel from https://nightly.link/chrultrabook/stoney-kernel/workflows/build/main/stoney-kernel.zip")

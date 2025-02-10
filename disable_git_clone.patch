@@ -2,7 +2,7 @@ diff --git a/setup-audio b/setup-audio
 index 4a88167..411ffb2 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -29,12 +29,12 @@ def process_args():
+@@ -27,12 +27,12 @@ def process_args():
  
  def install_ucm():
      print_status("Installing UCM configuration")

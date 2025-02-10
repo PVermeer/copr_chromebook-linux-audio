@@ -1,8 +1,8 @@
 diff --git a/setup-audio b/setup-audio
-index 026fa35..7cf7f89 100755
+index 31794eb..d400cac 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -162,15 +162,15 @@ def avs_audio():
+@@ -139,15 +139,15 @@ def avs_audio():
  
      # updated avs dsp firmware recently got merged upstream but is not packaged in any distro yet
      print_status("Installing AVS firmware")
@@ -10,18 +10,18 @@ index 026fa35..7cf7f89 100755
 -    mkdir("/lib/firmware/intel/avs/apl")
 -    try:
 -        urlretrieve("https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/intel/avs/apl/"
--                "dsp_basefw.bin", filename="/lib/firmware/intel/avs/apl/dsp_basefw.bin")
+-            "dsp_basefw.bin", filename="/lib/firmware/intel/avs/apl/dsp_basefw.bin")
 -        urlretrieve("https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/intel/avs/skl/"
--                "dsp_basefw.bin", filename="/lib/firmware/intel/avs/skl/dsp_basefw.bin")
+-            "dsp_basefw.bin", filename="/lib/firmware/intel/avs/skl/dsp_basefw.bin")
 -    except:
 -        print_error("Error: Failed to download AVS firmware")
 +    # mkdir("/lib/firmware/intel/avs/skl")
 +    # mkdir("/lib/firmware/intel/avs/apl")
 +    # try:
 +    #     urlretrieve("https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/intel/avs/apl/"
-+    #             "dsp_basefw.bin", filename="/lib/firmware/intel/avs/apl/dsp_basefw.bin")
++    #         "dsp_basefw.bin", filename="/lib/firmware/intel/avs/apl/dsp_basefw.bin")
 +    #     urlretrieve("https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/plain/intel/avs/skl/"
-+    #             "dsp_basefw.bin", filename="/lib/firmware/intel/avs/skl/dsp_basefw.bin")
++    #         "dsp_basefw.bin", filename="/lib/firmware/intel/avs/skl/dsp_basefw.bin")
 +    # except:
 +    #     print_error("Error: Failed to download AVS firmware")
  

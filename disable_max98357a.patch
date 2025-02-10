@@ -2,7 +2,7 @@ diff --git a/setup-audio b/setup-audio
 index 026fa35..2bfd99b 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -118,6 +118,12 @@ def avs_audio():
+@@ -95,6 +95,12 @@ def avs_audio():
      # Only show the warning to devices with max98357a
      override_avs = False
      if path_exists("/sys/bus/acpi/devices/MX98357A:00"):
