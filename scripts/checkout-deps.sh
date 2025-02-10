@@ -2,28 +2,35 @@
 
 set -e
 
+source ./scripts/bash-color.sh
+source ./scripts/update-rpm.sh --no-update
+
 apply_patches=$([ "$1" == "--apply-patches" ] && echo "true" || echo "false")
 
-# Get current commits in spec file
-source ./scripts/update-rpm.sh
-
 # Checkout commits
-echo -e "\n=== Checking out submodules ===\n"
+echo_color "\n=== Checking out submodules ==="
 
 git submodule update --init --recursive
 
-echo -e "\nSubmodule <$main_repo>:"
+echo_color "\nSubmodule <$main_repo>:"
 (cd "./$main_repo" && git reset --hard $current_main_commit)
 
-echo -e "\nSubmodule <$dep_repo>:"
+echo_color "\nSubmodule <$dep_repo>:"
 (cd "./$dep_repo" && git reset --hard $current_dep_commit)
-
-echo -e "\n"
 
 # Apply patches
 if [ "$apply_patches" = "true" ]; then
-  echo -e "\n=== Applying patches ==="
+  echo_color "\n=== Applying patches ==="
 
-  echo -e "\nSubmodule <$main_repo>:"
-  (cd "./$main_repo" && git apply -v ../*.patch)
+  echo_color "\nSubmodule <$main_repo>:"
+
+  cd "./$main_repo"
+
+  # One-by-one so the filename of the patch is printed
+  for file in ../*.patch; do
+    echo_color "\nPatching <$file>:"
+    git apply -v $file
+  done
+
+  cd ".."
 fi

@@ -2,14 +2,16 @@
 
 set -e
 
+source ./scripts/bash-color.sh
+
 copr_build_webhook=$1
 
-echo -e "\n=== Sending build request to Copr ===\n"
+echo_color "\n=== Sending build request to Copr ===\n"
 
 curl -X POST $copr_build_webhook
 echo "Succeeded"
 
-echo -e "\n=== Awaiting status ===\n"
+echo_color "\n=== Awaiting status ===\n"
 
 build_state=""
 until [ "$build_state" = "succeeded" ] || [ "$build_state" = "failed" ]; do

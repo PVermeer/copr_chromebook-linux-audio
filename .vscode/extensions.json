@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "ms-python.python",
-    "rvsmartporting.rpm-spec-ext"
+    "rvsmartporting.rpm-spec-ext",
+    "foxundermoon.shell-format"
   ]
 }
