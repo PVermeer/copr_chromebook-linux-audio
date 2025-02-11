@@ -12,6 +12,7 @@ slate='\033[38:5:67m'
 removecolor='\033[0m'
 arrow='➜'
 themecolor=$purple
+errorcolor=$red
 
 THEME=$(gsettings get org.gnome.desktop.interface accent-color 2>/dev/null || echo "'purple'")
 THEME=${THEME//\'/}
@@ -49,11 +50,46 @@ case $THEME in
   ;;
 esac
 
+parse_arguments() {
+  switches=""
+  while [[ "$#" -gt 0 ]]; do
+    case $1 in
+    -e)
+      switches+=" $1"
+      shift
+      ;;
+    -n)
+      switches+=" $1"
+      shift
+      ;;
+    -ne)
+      switches+=" $1"
+      shift
+      ;;
+    -en)
+      switches+=" $1"
+      shift
+      ;;
+    *)
+      break
+      ;;
+    esac
+  done
+  arguments="$@"
+  
+  # Some shells (github actions!) dont pass the color
+  # to the next line when provided before `\n`
+  if [ "${arguments:0:2}" = "\n" ]; then
+    arguments="${arguments#\\n}"
+    echo ""
+  fi
+}
+
 # Set stderr color
 exec 9>&2
 exec 8> >(
   while IFS='' read -r line || [ -n "$line" ]; do
-    echo -e "${red}${line}${removecolor}"
+    echo -e "${errorcolor}${line}${removecolor}"
   done
 )
 function undirect() { exec 2>&9; }
@@ -65,12 +101,13 @@ BASH_XTRACEFD=1 # set -x to stdout
 # Color wrapper
 echo_color() {
   local arguments=$@
+  parse_arguments $arguments
+  echo -e $switches "${themecolor}$arguments${removecolor}"
+}
 
-  # Some shells (github actions!) dont pass the color
-  # to the next line when provided before `\n`
-  if [ "${arguments:0:2}" = "\n" ]; then
-    arguments=${arguments#\\n}
-    echo ""
-  fi
-  echo -e "${themecolor}$arguments${removecolor}"
+# Red error wrapper
+echo_error() {
+  local arguments=$@
+  parse_arguments $arguments
+  echo -e $switches "${errorcolor}$arguments${removecolor}"
 }

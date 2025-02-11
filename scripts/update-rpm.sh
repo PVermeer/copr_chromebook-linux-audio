@@ -36,20 +36,31 @@ github_uri="https://api.github.com/repos/$author"
 github_api_request="-H 'Accept: application/vnd.github.VERSION.sha'"
 
 if [ -n "$GITHUB_TOKEN" ]; then
-  echo "Github token found"
+  echo "Using Github token"
   github_api_request+=" -H 'Authorization: Bearer $GITHUB_TOKEN'"
+  else
+  echo "Github token not found"
 fi
 
 new_main_commit=$(curl -s "$github_api_request" "$github_uri/$main_repo/commits/HEAD")
 new_dep_commit=$(curl -s "$github_api_request" "$github_uri/$dep_repo/commits/HEAD")
 
-echo "Script commit: $current_main_commit -> $new_main_commit"
-echo "UCM conf commit: $current_dep_commit -> $new_dep_commit"
+if [ -z "$new_main_commit" ] || [ -z "$new_dep_commit" ] || [ ${#new_main_commit} -ne 40 ] || [ ${#new_dep_commit} -ne 40 ]; then
+  echo_error "Could not fetch new commits"
 
-if [ -z "$new_main_commit" ] || [ -z "$new_dep_commit" ]; then
-  echo "Could not fetch new commits"
+  echo_color -n "\n$main_repo: \020"
+  echo_error "$new_main_commit"
+
+  echo_color -n "$dep_repo: \020"
+  echo_error "$new_dep_commit"
   exit 1
 fi
+
+echo_color -n "\n$main_repo commit: \020"
+echo "$current_main_commit -> $new_main_commit"
+
+echo_color -n "$dep_repo commit: \020"
+echo "$current_dep_commit -> $new_dep_commit"
 
 if [ "$current_main_commit" = "$new_main_commit" ] && [ "$current_dep_commit" = "$new_dep_commit" ]; then
 
