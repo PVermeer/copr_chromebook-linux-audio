@@ -16,14 +16,12 @@ Url: https://github.com/%{author}/%{repository}
 %package debug
 Summary: Enable debug for %{name}
 
-BuildRequires: alsa-sof-firmware
-BuildRequires: alsa-ucm
 BuildRequires: git
-BuildRequires: python3
-BuildRequires: wireplumber
 
 Requires: alsa-sof-firmware
 Requires: alsa-ucm
+Requires: python3
+Requires: wireplumber 
 
 Patch1: disable_git_clone.patch
 Patch2: disable_max98357a.patch
