@@ -15,7 +15,7 @@ echo_color "\nRPM Lint"
 rpmlint ./chromebook-linux-audio.spec
 
 echo_color "\nRPM Build"
-rpmbuild --define "_topdir $PWD/rpmbuild" -ba ./chromebook-linux-audio.spec
+rpmbuild --define "_topdir $PWD/rpmbuild" --noclean -ba ./chromebook-linux-audio.spec
 
 echo_color "\n=== RPM Contents ==="
 

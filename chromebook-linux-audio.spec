@@ -7,7 +7,7 @@
 %global depversioncommit %(echo -n %{depcommit} | head -c 8)
 
 Name: chromebook-linux-audio
-Version: 0.0.4
+Version: 0.0.5
 Release: %{mainversioncommit}.%{depversioncommit}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
@@ -30,9 +30,8 @@ Patch4: use_sof_for_apl.patch
 Patch5: disable_install_package.patch
 Patch6: fail_platform_stoney.patch
 
-%define workdir %{_builddir}/%{repository}
+%define workdir %{_builddir}/%{name}
 %define datadir %{_datadir}/%{name}
-%define builddatadir $RPM_BUILD_ROOT/%{datadir}
 
 %description
 RPM package to install chromebook-linux-audio to enable audio support on Chrome devices. All credits go to https://github.com/%{author}.
@@ -68,11 +67,13 @@ rm -rf .git
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{_datadir}
-mv %{workdir} $RPM_BUILD_ROOT/%{_datadir}
+mkdir -p %{buildroot}/%{datadir}
+cp -r %{workdir}/* %{buildroot}/%{datadir}
 
 %files
 %{datadir}
+
+%check
 
 %files debug
 %{datadir}
