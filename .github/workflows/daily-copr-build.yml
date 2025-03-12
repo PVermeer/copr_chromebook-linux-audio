@@ -1,0 +1,19 @@
+name: Daily COPR build
+
+on:
+  schedule:
+    - cron: "30 6 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  COPR_build:
+    uses: pvermeer/rpm-tools/.github/workflows/copr-build.yml@main
+    with:
+      spec_file: ./chromebook-linux-audio.spec
+      copr_owner: pvermeer
+      copr_project: chromebook-linux-audio
+      copr_package: chromebook-linux-audio
+    permissions:
+      contents: write
+    secrets:
+      COPR_WEBHOOK: ${{ secrets.COPR_WEBHOOK }}

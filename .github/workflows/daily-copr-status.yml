@@ -6,14 +6,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  update_rpm:
-    runs-on: ubuntu-latest
-    name: Check copr build status
-    timeout-minutes: 5
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Check status
-        run: |
-          bash ./scripts/status-copr.sh
+  COPR_build_status:
+    uses: pvermeer/rpm-tools/.github/workflows/copr-status.yml@main
+    with:
+      spec_file: ./chromebook-linux-audio.spec
+      copr_owner: pvermeer
+      copr_project: chromebook-linux-audio
+      copr_package: chromebook-linux-audio

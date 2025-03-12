@@ -6,7 +6,7 @@
     {
       "label": "Build RPM",
       "type": "shell",
-      "command": "bash scripts/build-rpm.sh",
+      "command": "./rpm-tools/rpm-tool build",
       "problemMatcher": [],
       "group": {
         "kind": "build",
