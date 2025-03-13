@@ -1,0 +1,14 @@
+diff --git a/functions.py b/functions.py
+index 4eea390..ab4df0f 100644
+--- a/functions.py
++++ b/functions.py
+@@ -343,6 +343,9 @@ def check_kernel_config(platform):
+     elif path_exists("/boot/config"):
+         with open("/boot/config") as file:
+             config = file.read()
++    elif path_exists(f"/usr/lib/modules/{active_kernel}/config"):
++        with open(f"/usr/lib/modules/{active_kernel}/config") as file:
++            config = file.read()
+     else:
+         # throw hands up in the air crying
+         print_error("Unable to read kernel config!")
