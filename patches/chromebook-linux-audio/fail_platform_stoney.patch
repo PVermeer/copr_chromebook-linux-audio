@@ -1,12 +1,12 @@
-diff --git a/setup-audio b/setup-audio
-index 026fa35..e7c8d4d 100755
---- a/setup-audio
-+++ b/setup-audio
-@@ -266,6 +266,7 @@ def amd_audio(platform):
-     elif platform == "stoney":
-         print_warning("WARNING: Your audio will not work unless you install a custom kernel")
-         print_warning("You can get a prebuilt kernel from https://nightly.link/chrultrabook/stoney-kernel/workflows/build/main/stoney-kernel.zip")
-+        exit(1)
+diff --git a/functions.py b/functions.py
+index 4eea390..5a53f29 100644
+--- a/functions.py
++++ b/functions.py
+@@ -259,6 +259,7 @@ def mdn_config():
+ def st_warning():
+     print_warning("WARNING: Audio on AMD StoneyRidge Chromebooks will not work with the kernel provided by your distro as the audio driver requires a special kernel config that cannot be shipped in any distro. A custom kernel is required.")
+     print_warning("You can get a prebuilt kernel from https://nightly.link/chrultrabook/stoney-kernel/workflows/build/main/stoney-kernel.zip")
++    exit(1)
  
  
- if __name__ == "__main__":
+ def avs_config(args):

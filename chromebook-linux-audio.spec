@@ -104,9 +104,7 @@ cp -r %{workdir}/%{source2}/* %{buildroot}/%{datadir}/%{source2}
 %{datadir}
 
 %post
-# Patch1 has disabled the dependency git clone in the script and
-# this is now provided in this binary. Copy it to correct location
-# where the script expect it. 
+# Copy source to the correct location where the script expect it. 
 cp -r %{datadir}/%{source2} /tmp
 
 # Run the script
@@ -117,9 +115,7 @@ cd %{datadir}/%{source}
 rm -rf /tmp/%{source2}
 
 %post debug
-# Patch1 has disabled the dependency git clone in the script and
-# this is now provided in this binary. Copy it to correct location
-# where the script expect it. 
+# Copy source to the correct location where the script expect it. 
 cp -r %{datadir}/%{source2} /tmp
 
 # Run the script
