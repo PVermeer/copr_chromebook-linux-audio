@@ -6,14 +6,14 @@
 %global author WeirdTreeThing
 %global source chromebook-linux-audio
 %global sourcerepo https://github.com/WeirdTreeThing/chromebook-linux-audio
-%global commit d244d144d2a410f2fad23d25446c401096d0ce8e
+%global commit 34e1081cf0ba10606a1b0b4ded97a5e9c2bf73c7
 %global versioncommit %(echo -n %{commit} | head -c 8)
 
 # Source repo 2
 %global author2 WeirdTreeThing
 %global source2 alsa-ucm-conf-cros
 %global sourcerepo2 https://github.com/WeirdTreeThing/alsa-ucm-conf-cros
-%global commit2 5b4253786ac0594a6ae9fe06336b54d8bc66efb0
+%global commit2 cd4a951ea8b5a257671db32bca5b0ca25ad726d8
 %global versioncommit2 %(echo -n %{commit2} | head -c 8)
 
 # Own copr repo
