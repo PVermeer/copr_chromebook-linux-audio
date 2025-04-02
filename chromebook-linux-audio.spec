@@ -6,7 +6,7 @@
 %global author WeirdTreeThing
 %global source chromebook-linux-audio
 %global sourcerepo https://github.com/WeirdTreeThing/chromebook-linux-audio
-%global commit dcb6710494d5733dd4d3253202d117a65e5ff534
+%global commit 7e5c26c70a991aa5ff8cb18483cff08e89425b7b
 %global versioncommit %(echo -n %{commit} | head -c 8)
 
 # Source repo 2
