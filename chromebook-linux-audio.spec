@@ -13,7 +13,7 @@
 %global author2 WeirdTreeThing
 %global source2 alsa-ucm-conf-cros
 %global sourcerepo2 https://github.com/WeirdTreeThing/alsa-ucm-conf-cros
-%global commit2 2f650c71f793f0a362334fc978a9717c0389a3db
+%global commit2 5d59bdf47cb69669da56cdae92134e6d256593eb
 %global versioncommit2 %(echo -n %{commit2} | head -c 8)
 
 # Own copr repo
