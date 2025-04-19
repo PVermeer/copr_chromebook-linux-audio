@@ -22,7 +22,7 @@
 
 Name: chromebook-linux-audio
 Version: 0.0.7
-Release: %{versioncommit}.%{versioncommit2}%{?dist}
+Release: 1.%{versioncommit}.%{versioncommit2}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
 Url: %{coprrepo}
