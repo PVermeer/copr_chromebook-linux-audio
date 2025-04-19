@@ -21,7 +21,7 @@
 %global coprsource copr_chromebook-linux-audio
 
 Name: chromebook-linux-audio
-Version: 0.0.7
+Version: 0.0.8
 Release: 1.%{versioncommit}.%{versioncommit2}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
