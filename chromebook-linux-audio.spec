@@ -6,14 +6,14 @@
 %global author WeirdTreeThing
 %global source chromebook-linux-audio
 %global sourcerepo https://github.com/WeirdTreeThing/chromebook-linux-audio
-%global commit c28f84bbe04fa6158ffbebe5adb8499cf21cc621
+%global commit 69d5910ec393f89a223a8da38034f8b2b40f5d73
 %global versioncommit %(echo -n %{commit} | head -c 8)
 
 # Source repo 2
 %global author2 WeirdTreeThing
 %global source2 alsa-ucm-conf-cros
 %global sourcerepo2 https://github.com/WeirdTreeThing/alsa-ucm-conf-cros
-%global commit2 520b95eaac2478f6a999b54a3945761171cbbf4c
+%global commit2 a4f0ed6cf59163fb571c33a81a6b40b6f53ed57d
 %global versioncommit2 %(echo -n %{commit2} | head -c 8)
 
 # Own copr repo
@@ -22,7 +22,7 @@
 
 Name: chromebook-linux-audio
 Version: 0.0.8
-Release: 8.%{versioncommit}.%{versioncommit2}%{?dist}
+Release: 9.%{versioncommit}.%{versioncommit2}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
 Url: %{coprrepo}
