@@ -1,13 +1,13 @@
 diff --git a/functions.py b/functions.py
-index 53aa3a5..2b4a82b 100644
+index 747313d..18255f6 100644
 --- a/functions.py
 +++ b/functions.py
-@@ -270,6 +270,8 @@ def st_warning():
+@@ -267,6 +267,8 @@ def st_warning():
      print_warning("WARNING: Audio on AMD StoneyRidge Chromebooks requires a patched kernel.")
      print_warning("You can get a prebuilt kernel for Debian/Ubuntu/Fedora from https://chrultrabook.sakamoto.pl/stoneyridge-kernel/")
- 
+     print_warning("For other distros, a patch file is included in that same link, under the patches directory.")
+
 +    exit(1)
 +
  
  def avs_config(args):
-     # Only show the warning to devices with max98357a
