@@ -1,8 +1,8 @@
 diff --git a/functions.py b/functions.py
-index 4eea390..815e446 100644
+index 47a977a..de7b58d 100644
 --- a/functions.py
 +++ b/functions.py
-@@ -265,24 +265,30 @@ def avs_config(args):
+@@ -276,24 +276,30 @@ def avs_config(args):
      # Only show the warning to devices with max98357a
      override_avs = False
      if path_exists("/sys/bus/acpi/devices/MX98357A:00"):
@@ -49,5 +49,5 @@ index 4eea390..815e446 100644
 +        #         print_error("Try again")
 +        #     override_avs = False
  
-     # avs tplg is from https://github.com/thesofproject/avs-topology-xml, but isn't packaged in distros yet
-     print_header("Installing topology")
+     print_header("Enabling AVS driver")
+     cpfile("conf/avs/snd-avs.conf", "/etc/modprobe.d/snd-avs.conf")
