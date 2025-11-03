@@ -1,14 +1,18 @@
 diff --git a/setup-audio b/setup-audio
-index c2883ea..4ff7d07 100755
+index c2883ea..4267b93 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -59,6 +59,9 @@ if __name__ == "__main__":
+@@ -59,8 +59,11 @@ if __name__ == "__main__":
      # This won't work for soundcards which don't currently exist, such as ones that need firmware installed
      # by this script, but those aren't known to have this issue
      # the ; true is there because that command will return a non-zero value for some reason
+-    print_status("Initializing sound card")
+-    bash("alsactl init; true")
 +
 +    # This however, does not work with rpm-ostree and should not be necessary.
 +    # Alsa services already do a restore/init.
-     print_status("Initializing sound card")
-     bash("alsactl init; true")
++    # print_status("Initializing sound card")
++    # bash("alsactl init; true")
  
+     print_status("Audio setup finished! Reboot to complete setup.")
+     if check_os_release():
