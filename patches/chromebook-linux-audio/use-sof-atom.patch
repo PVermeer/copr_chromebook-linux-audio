@@ -1,0 +1,16 @@
+diff --git a/functions.py b/functions.py
+index 58efdb4..27e672a 100644
+--- a/functions.py
++++ b/functions.py
+@@ -345,7 +345,10 @@ def sst_atom_config():
+     print_status("Try SST first. If SST doesn't work, try SOF instead.")
+ 
+     while True:
+-        user_input = input("Which driver would you like to use? [sof/sst]: ")
++        # Selecting 'sof' here for now because the general consensus is that
++        # it's more stable and in active development.
++        # user_input = input("Which driver would you like to use? [sof/sst]: ")
++        user_input = "sof"
+         if user_input.lower() == "sof":
+             print_status("Using sof")
+             # Remove sst modprobe config if it exists
