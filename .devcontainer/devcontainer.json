@@ -21,7 +21,9 @@
 			"extensions": [
 				"RVSmartPorting.rpm-spec-ext",
 				"ms-python.python",
-				"foxundermoon.shell-format"
+				"redhat.vscode-yaml",
+				"timonwong.shellcheck",
+				"lumirelle.shell-format-rev"
 			]
 		}
 	},

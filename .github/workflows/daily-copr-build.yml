@@ -13,6 +13,7 @@ jobs:
       copr_owner: pvermeer
       copr_project: chromebook-linux-audio
       copr_package: chromebook-linux-audio
+      check_patched_files_script: ./scripts/check-patched-files.sh
     permissions:
       contents: write
     secrets:
