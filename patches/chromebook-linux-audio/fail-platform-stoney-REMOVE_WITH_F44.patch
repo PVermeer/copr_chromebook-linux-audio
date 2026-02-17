@@ -1,0 +1,15 @@
+diff --git a/functions.py b/functions.py
+index caf0d29..ebf472c 100644
+--- a/functions.py
++++ b/functions.py
+@@ -271,6 +271,10 @@ def st_warning():
+     print_warning("You can get a prebuilt patched kernel for Debian/Ubuntu/Fedora from https://chrultrabook.sakamoto.pl/stoneyridge-kernel/")
+     print_warning("For other distros, a patch file is included in that same link, under the patches directory.")
+ 
++    # Fedora 44 will ship with kernel >= 6.19
++    # Remove this patch after upgrade
++    exit(1)
++
+ 
+ def avs_config(args):
+     # Only show the warning to devices with max98357a
