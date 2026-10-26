@@ -1,0 +1,16 @@
+diff --git a/setup-audio b/setup-audio
+index 787e628..2665398 100755
+--- a/setup-audio
++++ b/setup-audio
+@@ -296,11 +296,6 @@ mdn_config() {
+ 
+ install_ucm() {
+   echo_status "Installing UCM configuration"
+-  rm -r /tmp/alsa-ucm-conf-cros &>/dev/null
+-  git clone https://github.com/WeirdTreeThing/alsa-ucm-conf-cros \
+-  --depth 1 \
+-  $([ -n "$OVERRIDE_BRANCH" ] && echo "-b $OVERRIDE_BRANCH") \
+-  /tmp/alsa-ucm-conf-cros &>/dev/null
+ 
+   cp -r /tmp/alsa-ucm-conf-cros/ucm2/* /usr/share/alsa/ucm2/
+   cp -r /tmp/alsa-ucm-conf-cros/overrides/* /usr/share/alsa/ucm2/conf.d/
