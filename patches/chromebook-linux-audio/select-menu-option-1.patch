@@ -1,0 +1,13 @@
+diff --git a/setup-audio b/setup-audio
+index 787e628..5140b79 100755
+--- a/setup-audio
++++ b/setup-audio
+@@ -633,7 +633,7 @@ menu() {
+   echo -e " ${YELLOW}5) ${GREEN}Exit${RESET}"
+ 
+   echo -en "${BLUE} Selection: ${RESET}"
+-  read -re opt
++  opt="1"
+   case $opt in
+ 
+   1)
