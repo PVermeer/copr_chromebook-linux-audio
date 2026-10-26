@@ -1,53 +1,31 @@
-diff --git a/functions.py b/functions.py
-index 47a977a..de7b58d 100644
---- a/functions.py
-+++ b/functions.py
-@@ -276,24 +276,30 @@ def avs_config(args):
-     # Only show the warning to devices with max98357a
-     override_avs = False
-     if path_exists("/sys/bus/acpi/devices/MX98357A:00"):
--        if args.force_avs_install:
--            print_error(
--                "WARNING: Your device has max98357a and can cause permanent damage to your speakers if you set the volume too loud!")
--            while input('Type "I understand the risk of permanently damaging my speakers" in all caps to continue: ')\
--                != "I UNDERSTAND THE RISK OF PERMANENTLY DAMAGING MY SPEAKERS":
--                print_error("Try again")
--            override_avs = True
--        else:
--            print_error(
--                "WARNING: Your device has max98357a and can cause permanent damage to your speakers if you "
--                    "set the volume too loud! As a safety precaution devices with max98357a have speakers "
--                    "disabled until a fix is in place. Headphones and HDMI audio are safe from this.")
--            print_question("If you want to disable this check, restart the script with --force-avs-install")
--
--            while input('Type "I Understand my speakers will not work since my device has max98357a!" in all caps to continue: ')\
--                != "I UNDERSTAND MY SPEAKERS WILL NOT WORK SINCE MY DEVICE HAS MAX98357A!":
--                print_error("Try again")
--            override_avs = False
-+
-+        print_error(
-+                "Error: Your device has max98357a and is currently not supported in this RPM COPR build."
-+                )
-+        exit(1)
-+
-+        # if args.force_avs_install:
-+        #     print_error(
-+        #         "WARNING: Your device has max98357a and can cause permanent damage to your speakers if you set the volume too loud!")
-+        #     while input('Type "I understand the risk of permanently damaging my speakers" in all caps to continue: ')\
-+        #         != "I UNDERSTAND THE RISK OF PERMANENTLY DAMAGING MY SPEAKERS":
-+        #         print_error("Try again")
-+        #     override_avs = True
-+        # else:
-+        #     print_error(
-+        #         "WARNING: Your device has max98357a and can cause permanent damage to your speakers if you "
-+        #             "set the volume too loud! As a safety precaution devices with max98357a have speakers "
-+        #             "disabled until a fix is in place. Headphones and HDMI audio are safe from this.")
-+        #     print_question("If you want to disable this check, restart the script with --force-avs-install")
-+
-+        #     while input('Type "I Understand my speakers will not work since my device has max98357a!" in all caps to continue: ')\
-+        #         != "I UNDERSTAND MY SPEAKERS WILL NOT WORK SINCE MY DEVICE HAS MAX98357A!":
-+        #         print_error("Try again")
-+        #     override_avs = False
+diff --git a/setup-audio b/setup-audio
+index 787e628..f3a6ee9 100755
+--- a/setup-audio
++++ b/setup-audio
+@@ -216,23 +216,9 @@ avs_config() {
+   fi
  
-     print_header("Enabling AVS driver")
-     cpfile("conf/avs/snd-avs.conf", "/etc/modprobe.d/snd-avs.conf")
+   echo_warning "WARNING: Your device has the max98357a speaker amplifier.\nThere is not a proper volume limiter for this amp, and turning the\nvolume up too high could cause damage to your speakers."
+-  if $FORCE_AVS_INSTALL; then
+-    echo_warning "Please type the following in all caps to continue:"
+-    echo_info "I understand the risk of permanently damaging my speakers"
+-    while true; do
+-      read -re input
+-      if [ "$input" = "I UNDERSTAND THE RISK OF PERMANENTLY DAMAGING MY SPEAKERS" ]; then
+-        rm /etc/modprobe.d/avs-max98357a.conf
+-        break
+-      else
+-       echo_error "Invalid input"
+-      fi
+-    done
+-  else
+-    echo_info "For the safety of your device's speakers, they will be disabled. Headphones and HDMI audio will still work.\nYou can run this script with the '-f' flag to disable this check and force enable speakers."
+-    cp conf/avs/avs-max98357a.conf /etc/modprobe.d
+-  fi
+-  
++
++  echo_error "Error: Your device has max98357a and is currently not supported in this RPM COPR build."
++  exit 1
+ }
+ 
+ generic_sof_config() {
