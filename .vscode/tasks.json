@@ -6,7 +6,7 @@
     {
       "label": "Build RPM",
       "type": "shell",
-      "command": "./rpm-tools/rpm-tool build",
+      "command": "./rpm-tools/rpm-tool build 2>&1 | tee build.log",
       "problemMatcher": [],
       "group": {
         "kind": "build",
