@@ -3,7 +3,7 @@
 {
 	"build": {
 		// Path is relative to the devcontainer.json file.
-		"dockerfile": "Dockerfile"
+		"dockerfile": "rpm.Dockerfile"
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:2": {
