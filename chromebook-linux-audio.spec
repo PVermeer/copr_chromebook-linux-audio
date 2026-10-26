@@ -6,7 +6,7 @@
 %global author WeirdTreeThing
 %global source chromebook-linux-audio
 %global sourcerepo https://github.com/WeirdTreeThing/chromebook-linux-audio
-%global commit cd3c5f5c73cae02738b3b37e887a4b67579ef74c
+%global commit 84b700e271145df82ae71d0497af11705a2bb166
 %global versioncommit %(echo -n %{commit} | head -c 8)
 
 # Source repo 2
@@ -21,20 +21,16 @@
 %global coprsource copr_chromebook-linux-audio
 
 Name: chromebook-linux-audio
-Version: 0.0.12
-Release: 8.%{versioncommit}.%{versioncommit2}%{?dist}
+Version: 0.1.0
+Release: 1.%{versioncommit}.%{versioncommit2}%{?dist}
 License: BSD 3-Clause License
 Summary: RPM package to enable audio support on Chrome devices.
 Url: %{coprrepo}
-
-%package debug
-Summary: Enable debug for %{name}
 
 BuildRequires: git
 
 Requires: alsa-sof-firmware
 Requires: alsa-ucm
-Requires: python3
 Requires: wireplumber 
 
 %define workdir %{_builddir}/%{name}
@@ -49,9 +45,6 @@ RPM package to install chromebook-linux-audio to enable audio support on Chrome 
 This packages runs the script on install so it will work on immutable devices. If a device is NOT supported it will fail to install.
 
 The original script comes from https://github.com/mikaelvz/chromebook-linux-audio.
-
-%description debug
-Enable debug for %{name}
 
 %prep
 # To apply working changes handle sources / patches locally
@@ -73,7 +66,7 @@ git clone %{sourcerepo} %{sourcedir}
 cd %{sourcedir}
 git reset --hard %{commit}
 
-git apply %{coprdir}/patches/%{source}/*.patch
+git apply -v %{coprdir}/patches/%{source}/*.patch
 
 rm -rf .git
 cd %{workdir}
@@ -86,22 +79,12 @@ git reset --hard %{commit2}
 rm -rf .git
 cd %{workdir}
 
-%build
-
 %install
 mkdir -p %{buildroot}/%{datadir}/%{source}
 mkdir -p %{buildroot}/%{datadir}/%{source2}
 
 cp -r %{workdir}/%{source}/* %{buildroot}/%{datadir}/%{source}
 cp -r %{workdir}/%{source2}/* %{buildroot}/%{datadir}/%{source2}
-
-%files
-%{datadir}
-
-%check
-
-%files debug
-%{datadir}
 
 %post
 # Copy source to the correct location where the script expect it. 
@@ -114,18 +97,5 @@ cd %{datadir}/%{source}
 # Cleanup
 rm -rf /tmp/%{source2}
 
-%post debug
-# Copy source to the correct location where the script expect it. 
-cp -r %{datadir}/%{source2} /tmp
-
-# Run the script
-cd %{datadir}/%{source}
-./setup-audio --enable-debug
-
-# Cleanup
-rm -rf /tmp/%{source2}
-
-%preun debug
-# Run the script to disable debug
-cd %{datadir}/%{source}
-./setup-audio --disable-debug
+%files
+%{datadir}
