@@ -1,18 +1,28 @@
 diff --git a/setup-audio b/setup-audio
-index c2883ea..4267b93 100755
+index 787e628..9f851bb 100755
 --- a/setup-audio
 +++ b/setup-audio
-@@ -59,8 +59,11 @@ if __name__ == "__main__":
-     # This won't work for soundcards which don't currently exist, such as ones that need firmware installed
-     # by this script, but those aren't known to have this issue
-     # the ; true is there because that command will return a non-zero value for some reason
--    print_status("Initializing sound card")
--    bash("alsactl init; true")
+@@ -330,12 +330,17 @@ install_fixes() {
+   # Sometimes the alsa save/restore service doesn't init the sound card for some reason, so do it here instead
+   # This won't work for soundcards which don't currently exist, such as ones that need firmware installed
+   # by this script, but those aren't known to have this issue
+-  echo_status "Initializing sound card"
+-  if command -v alsactl &>/dev/null; then
+-    alsactl init &>/dev/null
+-  else
+-    echo_warning "Warning: alsactl not found, card not initialized. You may have audio issues."
+-  fi
 +
-+    # This however, does not work with rpm-ostree and should not be necessary.
-+    # Alsa services already do a restore/init.
-+    # print_status("Initializing sound card")
-+    # bash("alsactl init; true")
++  # rpm-ostree:
++  # This however, does not work with rpm-ostree and should not be necessary.
++  # Alsa services already do a restore/init on boot.
++
++  # echo_status "Initializing sound card"
++  # if command -v alsactl &>/dev/null; then
++  #   alsactl init &>/dev/null
++  # else
++  #   echo_warning "Warning: alsactl not found, card not initialized. You may have audio issues."
++  # fi
  
-     print_status("Audio setup finished! Reboot to complete setup.")
-     if check_os_release():
+   echo_status "Audio setup finished! Reboot to complete setup."
+   check_os_release && echo_info "If you still have any issues post-reboot, report them to https://github.com/WeirdTreeThing/chromebook-linux-audio"
