@@ -3,6 +3,6 @@
 set -e
 set -o pipefail
 
-echo -e "Checking for unpatched input statements in functions.py:\n"
+echo -e "Checking for unpatched read commands in setup-audio:\n"
 
-! grep -Ev '^.*#.*$' ./chromebook-linux-audio/functions.py | grep -E 'input\(.*\)'
+! grep -nE '^[[:space:]]*read([[:space:]]|$)|[;&|][[:space:]]*read([[:space:]]|$)|\bthen[[:space:]]+read([[:space:]]|$)' ./chromebook-linux-audio/setup-audio
